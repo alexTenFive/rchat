@@ -19,4 +19,8 @@ type (
 		Data       string `json:"data"`
 		ToUserName string `json:"to_user_name"`
 	}
+
+	TerminalData struct {
+		Message string
+	}
 )

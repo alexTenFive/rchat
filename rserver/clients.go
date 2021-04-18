@@ -39,16 +39,15 @@ func removeFromClients(name string) {
 }
 
 func sendToClientsExcept(message, exceptName string) {
-	for name, conn := range getClients() {
+	for _, conn := range getClients() {
 		// if name == exceptName {
 		// 	continue
 		// }
 		msg := &shared.Message{
 			Time:    time.Now(),
-			Name:    name,
+			Name:    exceptName,
 			Message: message,
 		}
-
 		bt, err := json.Marshal(msg)
 		if err != nil {
 			log.Printf("cannot marshal message to client [%s]: %s\n", message, err)
