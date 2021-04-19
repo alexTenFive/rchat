@@ -4,6 +4,7 @@ import (
 	"chat/shared"
 	"encoding/json"
 	"fmt"
+	"io"
 	"log"
 	"net"
 )
@@ -51,6 +52,9 @@ func handleClient(name string, conn *net.TCPConn) {
 		n, err := conn.Read(buffer[0:])
 		if err != nil {
 			if _, ok := err.(*net.OpError); ok {
+				break
+			}
+			if err == io.EOF {
 				break
 			}
 			log.Printf("cannot read data from client [%s]: %s, %T\n", conn.RemoteAddr().String(), err, err)
